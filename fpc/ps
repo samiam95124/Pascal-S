@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Compile with pascals using GPC Pascal
+#
+# Execute with:
+#
+# ps <file>
+#
+# Where <file> is the name of the source file without
+# extention. The Pascal file is compiled and run.
+# Any compiler errors are output to the screen. Input
+# and output to and from the running program are from
+# the console.
+#
+
+if [ -z "$1" ]
+then
+
+   echo "*** Error: Missing parameter"
+   exit 1
+
+fi
+
+if [ ! -f $1.pas ]
+then
+
+   echo "*** Error: Missing $1.pas file"
+   exit 1
+
+fi
+
+echo
+echo Compiling and running $1
+echo
+cp $1.pas srcfil
+pascals
+rm srcfil

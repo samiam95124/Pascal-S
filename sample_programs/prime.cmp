@@ -1,0 +1,118 @@
+
+Compiling and running sample_programs\prime
+
+
+Pascal-S compiler/interpreter
+    0  (*$l-*)
+    0  (******************************************************************************)
+    0  (*                                                                            *)
+    0  (* Sieve benchmark program reproduced verbatum from                           *)
+    0  (* page 285 of BYTE magazine's January 1983 edition,                          *)
+    0  (* with the exception of the 'output' file specification                      *)
+    0  (* inserted in the program header. This is required for                       *)
+    0  (* IP Pascal.                                                                 *)
+    0  (*                                                                            *)
+    0  (* The Result figures are as follows:                                         *)
+    0  (*                                                                            *)
+    0  (* Z80 4mhz 100 iterations IP Pascal                                          *)
+    0  (*                                                                            *)
+    0  (*      Compiled bytes:                                                       *)
+    0  (*      Memory used: 2,242 bytes                                              *)
+    0  (*      Compile plus load: 125 seconds                                        *)
+    0  (*      Execution time: 21.0 seconds, 0.21 sec/iter                           *)
+    0  (*                                                                            *)
+    0  (* 80486DX2 66mhz 10000 iterations SVS compiler:                              *)
+    0  (*                                                                            *)
+    0  (*      Size: 90,708 (includes DOS extender)                                  *)
+    0  (*      Execution time: 77 sec. 0.0077 sec/iter                               *)
+    0  (*                                                                            *)
+    0  (* 80486Dx2 66mhz 10000 iterations Prospero OS/2 2.x                          *)
+    0  (* compiler:                                                                  *)
+    0  (*                                                                            *)
+    0  (*      Size: 16,404                                                          *)
+    0  (*      Execution time: 163 sec. 0.0163 sec/iter                              *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100000 iterations Delphi 5.0                               *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 11 sec., 0.00011 sec/iter                             *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 10000 iterations IP Pascal, check                          *)
+    0  (* encoder:                                                                   *)
+    0  (*                                                                            *)
+    0  (*      Size: 134,656                                                         *)
+    0  (*      Execution time: 16 sec., 0.0016 sec/iter                              *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100000 iterations FPC Pascal                               *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 30 sec., 0.0003 sec/iter                              *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100 iterations Irie Pascal                                 *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 9 sec., 0.09 sec/iter                                 *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100000 iterations IP Pascal, full encoder, no optos        *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 61 sec., 0.00061 sec/iter                             *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 1000000 iterations 80386 Assembly                          *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 112 sec., 0.000112 sec/iter                           *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100000 iterations GPC                                      *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 19 sec., 0.00019 sec/iter                             *)
+    0  (*                                                                            *)
+    0  (* AMD CPU 1.8 GHZ 100000 iterations GCC                                      *)
+    0  (*                                                                            *)
+    0  (*      Size:                                                                 *)
+    0  (*      Execution time: 11 sec., 0.00011 sec/iter                             *)
+    0  (*                                                                            *)
+    0  (******************************************************************************)
+    0  
+    0  program sieve(output);
+    0  
+    0  const
+    0  
+    0    size = 8190;
+    0  
+    0  var
+    0  
+    0    flags : array [0..size] of boolean;
+    0    i, prime, k, count, iter : integer;
+    0  
+    0  begin
+    0  
+    0     writeln('10 iterations');
+    3     for iter := 1 to 10 do begin (* do program 10000 times *)
+    7  
+    7        count := 0; (* prime counter *)
+   10        for i := 0 to size do flags[i] := true; (* set flags all true *)
+   20        for i := 0 to size do
+   24           if flags[i] then begin (* found a prime *)
+   29  
+   29              prime := i+i+3; (* twice the index + 3 *)
+   36              (* writeln(prime); *)
+   36              k := i + prime; (* first multiple to kill *)
+   41              while k <= size do begin
+   45                 flags[k] := false; (* zero a non-prime *)
+   50                 k := k + prime (* next multiple *)
+   52              end;
+   56              count := count + 1 (* primes found *)
+   59  
+   59           end;
+   62  
+   62     end;
+   63     writeln(count, ' primes') (* primes found in 10th pass *)
+   67  
+   67  end.
+ (eof) 
+10 iterations
+      1899 primes
+
+    3631693 steps

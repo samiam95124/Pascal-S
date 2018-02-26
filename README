@@ -1,0 +1,56 @@
+                     THE PASCAL-S COMPILER/INTERPRETER
+
+============================== Description =====================================
+
+Pascal-S was a compiler/interpreter program for a subset of the Pascal language.
+It originated with Niklaus Wirth in ETH, Zurich.
+
+The full instructions for running and setting up the Pascal-S 
+compiler/interpreter have all been incorporated into the document:
+
+doc/pascals.docx
+
+Which is a Microsoft Word document, 2007 or later. it is also available in the
+formats:
+
+doc/pascals.pdf     Adobe Portable Document Format.
+doc/pascals.html    Web page format.
+
+Please consult one of these documents for full instructions on how to use 
+Pascal-S.
+
+============================== Quick start =====================================
+
+Pascal-S uses the standard GNU release layout. You execute:
+
+[Windows]
+
+> setpath
+> configure
+> make
+
+[linux]
+
+> ./setpath
+> ./configure
+> make
+
+(You can avoid "setpath" by placing the ./bin directory on your path)
+
+This will make the compiler and interpreter set. You can then try a sample
+program as:
+
+> ps sample_programs/hello
+
+================================== Problems ====================================
+
+You need a working gpc implementation. It is strongly suggested you use the
+gpc version 20070904. gpc has/had various compliance issues with ISO 7185, and
+the compiler has ceased to be supported. This version is found to be solid.
+
+You will need a working set of linux tooling (grep, ls, rm, etc). Mingw has
+an excellent set of tools for Windows users.
+
+You need the "flip" line ending adapation program. If you don't have it, we
+include a copy you can compile, or you can simply go find it. It is a widely
+available program.

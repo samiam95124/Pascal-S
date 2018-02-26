@@ -1,0 +1,16 @@
+
+Compiling and running sample_programs\hello
+
+
+Pascal-S compiler/interpreter
+    0  program hello(output);
+    0  
+    0  begin
+    0     
+    0     writeln('Hello, world')
+    2  
+    2  end.
+ (eof) 
+Hello, world
+
+          4 steps
